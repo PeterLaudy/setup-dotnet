@@ -151,7 +151,7 @@ export class DotnetCoreInstaller {
         scriptArguments.push('--version', calculatedVersion);
       }
       if (this.dontAddToPath) {
-        scriptArguments.push('-nopath', true);
+        scriptArguments.push('-nopath', '');
       }
 
       // process.env must be explicitly passed in for DOTNET_INSTALL_DIR to be used
@@ -283,7 +283,7 @@ export class DotnetCoreInstaller {
   }
 
   private version: string;
-  private dontAddToPath: boolean = false;
+  private dontAddToPath: boolean;
 }
 
 const DotNetCoreIndexUrl: string =
