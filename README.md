@@ -27,6 +27,7 @@ steps:
 - uses: actions/setup-dotnet@v1
   with:
     dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
+	no-path: true # Prevent the installer from adding the SDK to the PATH environment variable
 - run: dotnet build <my project>
 ```
 
