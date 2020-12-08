@@ -29,7 +29,7 @@ export async function run() {
     }
 
     if (version) {
-      const noPath = core.getInput('no-path');
+      const noPath = core.getInput('no-path').toUpper() === 'TRUE';
       const dotnetInstaller = new installer.DotnetCoreInstaller(version, noPath);
       await dotnetInstaller.installDotnet();
     }
