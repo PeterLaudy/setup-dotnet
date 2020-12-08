@@ -150,6 +150,9 @@ export class DotnetCoreInstaller {
       if (calculatedVersion) {
         scriptArguments.push('--version', calculatedVersion);
       }
+      if (this.dontAddToPath) {
+        scriptArguments.push('-nopath', true);
+      }
 
       // process.env must be explicitly passed in for DOTNET_INSTALL_DIR to be used
       resultCode = await exec.exec(`"${scriptPath}"`, scriptArguments, {
