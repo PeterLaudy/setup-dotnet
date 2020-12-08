@@ -16933,6 +16933,9 @@ class DotnetCoreInstaller {
                 if (calculatedVersion) {
                     command += ` -Version ${calculatedVersion}`;
                 }
+                if (this.dontAddToPath) {
+                    command += ` -NoPath`;
+                }
                 if (process.env['https_proxy'] != null) {
                     command += ` -ProxyAddress ${process.env['https_proxy']}`;
                 }
@@ -16972,7 +16975,7 @@ class DotnetCoreInstaller {
                     scriptArguments.push('--version', calculatedVersion);
                 }
                 if (this.dontAddToPath) {
-                    scriptArguments.push('-nopath', '');
+                    scriptArguments.push('-NoPath');
                 }
                 // process.env must be explicitly passed in for DOTNET_INSTALL_DIR to be used
                 resultCode = yield exec.exec(`"${scriptPath}"`, scriptArguments, {
