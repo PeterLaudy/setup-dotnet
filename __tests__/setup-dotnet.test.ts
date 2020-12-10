@@ -39,10 +39,7 @@ describe('setup-dotnet tests', () => {
 
     const setOutputMock = jest.spyOn(core, 'setOutput');
     await setup.run();
-    expect(setOutputMock).toHaveBeenCalledWith(
-      'dotnet-cli-path',
-      toolDir
-    );
+    expect(setOutputMock).toHaveBeenCalledWith('dotnet-cli-path', toolDir);
 
     expect(fs.existsSync(path.join(toolDir, 'sdk', '3.1.201'))).toBe(true);
     if (IS_WINDOWS) {

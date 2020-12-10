@@ -23,7 +23,7 @@ describe('installer tests', () => {
     await io.rmRF(toolDir);
     await io.rmRF(tempDir);
   });
-  
+
   afterEach(() => {
     try {
       process.env.PATH = oldPath;

@@ -177,7 +177,11 @@ export class DotnetCoreInstaller {
       core.exportVariable('DOTNET_ROOT', this.installedPath);
     } else {
       if (IS_WINDOWS) {
-        this.installedPath = path.join(process.env['LocalAppData'] + '', 'Microsoft', 'dotnet');
+        this.installedPath = path.join(
+          process.env['LocalAppData'] + '',
+          'Microsoft',
+          'dotnet'
+        );
         if (!this.dontAddToPath) {
           // This is the default set in install-dotnet.ps1
           core.addPath(this.installedPath);
