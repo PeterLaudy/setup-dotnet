@@ -14,7 +14,10 @@ inputs:
   config-file:
     description: 'Optional NuGet.config location, if your NuGet.config isn''t located in the root of the repo.'
   no-path:
-    description: 'Optional switch to prevent this action from altering the PATH environment variable. Can be used when installing an older SDK version.'
+    description: 'Optional switch to prevent this action from altering the PATH environment variable. Usefull when installing an older SDK version.'
+outputs:
+  dotnet-cli-path:
+    description: 'The location where the .NET Core CLI has been installed.'
 runs:
   using: 'node12'
   main: 'dist/index.js'

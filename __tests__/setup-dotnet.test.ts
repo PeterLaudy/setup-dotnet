@@ -1,3 +1,4 @@
+import * as core from '@actions/core';
 import io = require('@actions/io');
 import fs = require('fs');
 import os = require('os');
@@ -35,7 +36,13 @@ describe('setup-dotnet tests', () => {
     if (!fs.existsSync(globalJsonPath)) {
       fs.writeFileSync(globalJsonPath, jsonContents);
     }
+
+    const setOutputMock = jest.spyOn(core, 'setOutput');
     await setup.run();
+    expect(setOutputMock).toHaveBeenCalledWith(
+      'dotnet-cli-path',
+      toolDir
+    );
 
     expect(fs.existsSync(path.join(toolDir, 'sdk', '3.1.201'))).toBe(true);
     if (IS_WINDOWS) {

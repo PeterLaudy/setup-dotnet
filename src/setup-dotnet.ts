@@ -29,12 +29,17 @@ export async function run() {
     }
 
     if (version) {
-      const noPath = core.getInput('no-path').toUpperCase() === 'TRUE';
+      let noPath = false;
+      const noPathParamExists = core.getInput('no-path');
+      if (noPathParamExists) {
+          noPath = noPathParamExists.toUpperCase() === 'TRUE';
+      }
       const dotnetInstaller = new installer.DotnetCoreInstaller(
         version,
         noPath
       );
       await dotnetInstaller.installDotnet();
+      core.setOutput('dotnet-cli-path', dotnetInstaller.installedPath);
     }
 
     const sourceUrl: string = core.getInput('source-url');
