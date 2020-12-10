@@ -27,7 +27,6 @@ steps:
 - uses: actions/setup-dotnet@v1
   with:
     dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
-	no-path: true # Prevent the installer from adding the SDK to the PATH environment variable
 - run: dotnet build <my project>
 ```
 
@@ -94,6 +93,19 @@ steps:
     NUGET_AUTH_TOKEN: ${{secrets.AZURE_DEVOPS_PAT}} # Note, create a secret with this name in Settings
 - name: Publish the package to Azure Artifacts
   run: dotnet nuget push <my project>/bin/Release/*.nupkg
+```
+
+Install an older version of the SDK, but leave the PATH untouched:
+```yaml
+steps:
+- uses: actions/checkout@main
+- uses: actions/setup-dotnet@v1
+  id: dotnet-install
+  with:
+    dotnet-version: '1.1.8' # SDK Version to use is an old one
+	no-path: 'true' # Don't add the location of this SDK version to start of the PATH
+# Build the project with the installed dotnet SDK
+- run: ${{steps.dotnet-install.outputs.dotnet-cli-path}}\dotnet build <my old project>
 ```
 
 ## Environment Variables to use with dotnet
